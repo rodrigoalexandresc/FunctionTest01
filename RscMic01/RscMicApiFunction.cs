@@ -19,22 +19,14 @@ namespace RscMic01
         [Function("Rscmc")]
         public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
         {
-            try
-            {
-                if (req.Method == "GET")
-                    return await DailyGet(req);
+            if (req.Method == "GET")
+                return await DailyGet(req);
 
-                if (req.Method == "POST")
-                    return await DailyPost(req);
+            if (req.Method == "POST")
+                return await DailyPost(req);
 
-                _logger.LogInformation("C# HTTP trigger function processed a request.");
-                return new OkObjectResult("Welcome to Azure Functions! RSC Mic");
-            }
-            catch (Exception ex)
-            {
-                return new BadRequestObjectResult(ex.Message);                
-            }
-
+            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            return new OkObjectResult("Welcome to Azure Functions! RSC Mic");
         }
 
         private async Task<IActionResult> DailyPost(HttpRequest req)
